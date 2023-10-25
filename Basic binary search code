@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int search(vector<int> &v,int target,int n)
+{
+    int low=0,heigh=n-1;
+    int mid=(low+heigh)/2;
+    
+    while(low<=heigh)
+    {
+        if(v[mid]==target)
+        {
+            return mid;
+        }
+        else if(target<v[mid])
+        {
+            heigh=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+        
+        mid=(low+heigh)/2;
+    }
+    
+    
+    return -1;
+}
+
+
+int main()
+{
+    vector<int> v;
+    
+    int n;
+    
+    cin>>n;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        
+        v.push_back(x);
+        
+    }
+
+int k;
+cin>>k;  //the number we want to search
+    
+    sort(v.begin(),v.end());
+    
+    int t=search(v,k,n);
+    
+    cout<<t;
+    
+    return 0;
+}
