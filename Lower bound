@@ -1,0 +1,58 @@
+//lower bound=index with value just greater than or equal to given target
+//if lower bound not available then lower bond=size of array
+
+#include<bits/stdc++.h>
+using namespace std;
+int lower_bound(vector<int> v,int lb,int n)
+{
+    int low=0,heigh=n-1;
+    
+    int ans=n;
+    int mid=(low+heigh)/2;
+    
+    while(low<=heigh)
+    {
+        if(v[mid]>=lb)
+        {
+            heigh=mid-1;
+            
+            ans=mid;
+            
+            mid=(low+heigh)/2;
+        }
+        else
+        {
+            low=mid+1;
+            mid=(low+heigh)/2;
+        }
+        
+    }
+    
+    return ans;
+    
+    
+}
+
+
+int main()
+{
+    int n;
+    
+    cin>>n;
+    
+    vector<int> v;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        
+        v.push_back(x);
+    }
+    
+    int t=lower_bound(v,3,n);
+    
+    cout<<t;
+    
+    return 0;
+}
