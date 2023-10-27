@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int first_occur(vector<int> &v,int target,int n)
+{
+    int low=0,heigh=n-1;
+    int mid=(low+heigh)/2;
+    int first =-1,last=-1;
+   
+    while(low<=heigh)
+    {
+        if(v[mid]==target)
+        {
+            first=mid;
+            
+            heigh=mid-1;
+            // mid=(low+heigh)/2
+        }
+        else if(target<v[mid])
+        {
+            heigh=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+        
+        mid=(low+heigh)/2;
+    }
+    
+    
+    return first;
+}
+
+int last_occur(vector<int> &v,int target,int n)
+{
+    int low=0,heigh=n-1;
+    int mid=(low+heigh)/2;
+    int last=-1;
+    while(low<=heigh)
+    {
+        if(v[mid]==target)
+        {
+            last=mid;
+            
+            low=mid+1;
+            // mid=(low+heigh)/2
+        }
+        else if(target<v[mid])
+        {
+            heigh=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+        
+        mid=(low+heigh)/2;
+    }
+    
+    
+    return last;
+}
+
+
+int main()
+{
+    vector<int> v;
+    
+    int n;
+    
+    cin>>n;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        
+        v.push_back(x);
+        
+    }
+
+int k;
+cin>>k;  //the number we want to search
+    
+    sort(v.begin(),v.end());
+    
+    int t=first_occur(v,k,n);
+    int p=last_occur(v,k,n);
+    cout<<t<<" "<<p;
+    
+    return 0;
+}
