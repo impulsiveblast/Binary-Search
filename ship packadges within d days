@@ -1,0 +1,77 @@
+//min capacity of ship to transport packadges within d days
+//if array not sorted sort it
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int ship(vector<int> v,int n,int d)
+{
+    sort(v.begin(),v.end());
+    
+    int low=v[n-1];
+    
+    int heigh=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        heigh+=v[i];
+    }
+    int capacity;
+    while(low<=heigh)
+    {
+        int mid=low+(heigh-low)/2;
+        int load=0;
+        int d1=0;
+        for(int i=0;i<n;i++)
+        {
+            if((load+v[i])<=mid && i!=n-1)
+            {
+                load+=v[i];
+            }
+            else 
+            {
+                
+                d1++;
+            }
+        }
+        
+        if(d1>d)
+        {
+            low=mid+1;
+        }
+        else
+        {
+            heigh=mid-1;
+            capacity=mid;
+        }
+        
+        
+    }
+    
+    
+    return capacity;
+    
+    
+    
+}
+
+
+int main()
+{
+    vector<int> v;
+    
+    int n;
+    cin>>n;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        
+        v.push_back(x);
+    }
+    
+    int t=ship(v,n,5);
+    
+    cout<<t;
+}
