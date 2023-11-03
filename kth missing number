@@ -1,0 +1,77 @@
+//kth positive number
+//2 3 4 7 11 k=5
+//find the no of missing numbers till a given index
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int kthno(vector<int> v,int n,int k)
+{
+    vector<int> v1;
+    int t=0;
+    t=v[0]-1;
+    v1.push_back(t);
+    
+      for(int i=1;i<n;i++)
+      {
+        t+=v[i]-v[i-1]-1;
+        
+        v1.push_back(t);
+      }
+      
+      int low=0,heigh=n-1;
+      int mid=(low+heigh)/2;
+      
+      while(low<=heigh)
+      {
+         mid=(low+heigh)/2;
+         
+         if(v1[mid]>=k)
+         {
+             heigh=mid-1;
+         }
+         else
+         {
+            low=mid+1; 
+         }
+         
+      }
+      
+      if(v1[mid]>k)
+      {
+          return  v[mid]-(v1[mid]-k);
+      }
+      else if(v1[mid]<k)
+      {
+          return v[mid]+(k-v1[mid]);
+      }
+      else
+      {
+          return v[mid]-1;
+      }
+      
+      
+      
+}
+
+int main()
+{
+    int n,k;
+    cin>>n>>k;
+    
+    vector<int> v;
+    
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        
+        v.push_back(x);
+    }
+    
+    int t=kthno(v,n,k);
+    
+    cout<<t;
+    
+    return 0;
+}
