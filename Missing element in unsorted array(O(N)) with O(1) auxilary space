@@ -1,0 +1,34 @@
+class Solution {
+  public:
+
+    // Note that the size of the array is n-1
+    int missingNumber(int n, vector<int>& arr) {
+int t=0;
+        // Your code goes here
+        // map<int,int> m;
+        
+        
+        // for(int i=0;i<arr.size();i++)
+        // {
+        //     m[arr[i]]=1;
+        // }
+        
+        //   for(int i=1;i<=n;i++)
+        // {
+        //     if(m[i]==0)
+        //     {
+        //         return i;
+        //         // break;
+        //     }
+        // }
+        
+            for(int i=0;i<arr.size();i++)
+        {
+            t+=arr[i];
+        }
+        
+        
+        return abs(t-(n*(n+1))/2);
+        
+    }
+};
