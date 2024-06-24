@@ -1,6 +1,7 @@
 //search element in rotated sorted array
 
 //check for the sorted portion of the array/vector
+//apply binary search only in those parts ..if target is present adjus low and high in that range only otherwise shift the high before mid an repeat the process
 
 #include<bits/stdc++.h>
 using namespace std;
