@@ -1,0 +1,74 @@
+//similar to shipping in d days 
+//allocation of n books to m students
+//most time would be takken by a painter painting most part of wall
+
+class Solution
+{
+  public:
+    long long minTime(int arr[], int n, int k)
+    {
+        // code here
+        
+         long long t1=arr[0],t2=0;
+         for(long long i=0;i<n;i++)
+         {
+             t2+=arr[i];
+         }
+         
+         for(long long i=0;i<n;i++)
+         {
+             long long a=arr[i];
+            t1=max(a,t1);
+         }
+         
+         long long l=t1,h=t2,mid;
+         
+         while(l<=h)
+         {
+             mid=(l+h)/2;
+             long long p=0,w=0;
+             for(long long i=0;i<n;i++)
+             {
+                 
+                 if(p+arr[i]<=mid && i<n-1)
+                 {
+                     p+=arr[i];
+                     
+                 }
+                 else if(p+arr[i]>mid || i==n-1)
+                 {
+                    if(p+arr[i]>mid && i<n-1)
+                    {
+                       p=arr[i];
+                       w++;
+                    }
+                    else if(i==n-1)
+                    {
+                        if(p+arr[i]>mid)
+                        {
+                            w+=2;
+                        }
+                        else if(p+arr[i]<=mid)
+                        {
+                            w++;
+                        }
+                    }
+                 }
+                 
+             }
+             
+             if(w>k)
+             {
+               l=mid+1;  
+             }
+             else
+             {
+               h=mid-1;  
+             }
+             
+         }
+         
+         
+         return l;
+    }
+};
