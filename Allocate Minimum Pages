@@ -2,68 +2,60 @@
 
 class Solution {
   public:
-    // Function to find minimum number of pages.
-    long long findPages(int n, int arr[], int m) {
+    int findPages(vector<int> &arr, int k) {
         // code here
-        int t1=0,t2=arr[0];
         
-        for(int i=0;i<n;i++)
+        int low=0,heigh=0,mid;
+        
+        for(int i=0;i<arr.size();i++)
         {
-            t1+=arr[i];
-            t2=max(t2,arr[i]);
+            
+            low=max(arr[i],low);
+            
+            heigh+=arr[i];
         }
         
-        int l=t2,h=t1;
-        
-        int p,c;
-        int mid;
-        while(l<=h)
+        while(low<=heigh)
         {
-            p=0;
-            c=0;
-             mid=(l+h)/2;
-            for(int i=0;i<n;i++)
+            
+            mid=(low+heigh)/2;
+            int count=0,sum=0;
+            
+            for(int i=0;i<arr.size();i++)
             {
-                if(p+arr[i]<=mid && i<n-1)
-                {
-                    p+=arr[i];
-                }
-                else if(p+arr[i]>mid || i==n-1)
-                {
-                    if(p+arr[i]<=mid && i==n-1)
-                   {
-                    //  p+=arr[i];
-                     c++;
-                   }
-                   else if(p+arr[i]>mid && i==n-1)
-                   {
-                       c+=2;
-                   }
-                   else
-                   {
-                     c++;
-                     p=arr[i];      
-                   }
+               sum+=arr[i];
+               
+               if(sum>mid)
+               {
+                   count++;
+                   sum=arr[i];
+               }
+               
+               if(i==arr.size()-1)
+               {
+                   count++;
+               }
+            
                 
-                }
             }
             
-            if(c>m)
+            if(count>k)
             {
-                l=mid+1;
+                low=mid+1;
             }
             else
             {
-                h=mid-1;
+                heigh=mid-1;
             }
+            
         }
         
-        if(m<=n)
+        
+        if(arr.size()>=k)
         {
-          return l;        
+            return low;    //here even if a student has not been given max no of pages he still can be given pages less than than number just to fulfill the count of  students
         }
         
         return -1;
-        
     }
 };
