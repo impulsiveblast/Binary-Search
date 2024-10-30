@@ -1,0 +1,62 @@
+//from banquotes <m to banquotes>=m
+//the moment polarity crosses the first index i.e (here d1) is the minimum value or the answer
+
+class Solution {
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int d1=bloomDay[0],d2=bloomDay[0];
+long long ans=-1,f=0;
+        for(long long i=0;i<bloomDay.size();i++)
+        {
+            d1=min(bloomDay[i],d1);
+            d2=max(bloomDay[i],d2);
+        }
+
+        long long mid=(d1+d2)/2;
+
+        while(d1<=d2)
+        {
+            mid=(d1+d2)/2;
+
+            long long count=0,sum=0;
+
+            for(long long i=0;i<bloomDay.size();i++)
+            {
+                // sum=bloomDay[i];
+                if(bloomDay[i]<=mid)
+                {
+                    count++;
+                }
+                else if(bloomDay[i]>mid)
+                {
+                    count=0;
+                }
+
+                if(count==k)
+                {
+                    sum++;
+                    count=0;
+                }
+            }
+
+            if(sum>=m)
+        {
+            
+                f=1;
+            
+             d2=mid-1;
+           }
+           else
+           {
+              d1=mid+1;
+           }
+        }
+
+    if(f==1)
+    {
+       return d1;
+    }
+
+    return -1;
+    }
+};
