@@ -19,7 +19,7 @@ int rot_search(vector<int> v,int target,int n)
             return mid;
         }
         
-        if(v[i]<=v[mid])
+        if(v[i]<=v[mid])    //left sorted
         {
             if(target>=v[i] && target<=v[mid])
             {
@@ -31,7 +31,7 @@ int rot_search(vector<int> v,int target,int n)
                 i=mid+1;
             }
         }
-        else
+        else       //right sorted
         {
             if(target<=v[j] && target>=v[mid])
             {
